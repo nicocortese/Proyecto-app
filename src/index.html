@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Datos a llenar</title>
+    <meta
+      name="viewport"
+      content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="./css/style.css"/>
+    <link rel="stylesheet" href="./css/tateti.css"/>
+
+    </head>
+    <body>
+      <div id="main">
+        <h2>Mis juegos</h2>
+        <button id="btn-j1">Juego 1</button>
+        <button id="btn-j2">Juego 2</button>
+        <button id="btn-j3">Juego 3</button>
+      </div>
+      <div id="perfil" class="nodisp">
+        <h2>Perfil</h2>
+        <form>
+          <label for="name">Nombre: </label>
+          <input id="name" name="name" />
+          <br>
+          <label for="nick">Apodo: </label>
+          <input id="nick" name="nick" />
+          <br>
+          <input id="savePreferences" type="submit" value="Guardar">
+          </form>
+      </div>
+      <div id="j1" class="game nodisp">
+       <button id="btn-j1-back">Volver</button> 
+        <h2>Ta Te Ti</h2>
+        <div id="tablero">
+          <div class="celda"></div>
+          <div class="celda"></div>
+          <div class="celda"></div>
+          <div class="celda"></div>
+          <div class="celda"></div>
+          <div class="celda"></div>
+          <div class="celda"></div>
+          <div class="celda"></div>
+          <div class="celda"></div>
+      </div>
+      <h2 class="ganador"></h2>
+    <h2>Turno del jugador: <span id="jugador">X</span></h2>
+
+    <button id="reset" disabled>Reiniciar</button>
+
+      </div>
+      <div id="j2" class="game nodisp">
+        <button id="btn-j2-back">Volver</button> 
+        <h2>Juego 2</h2>
+        <p>Juego 2 acá...</p>
+      </div>
+      <div id="j3" class="game nodisp">
+        <button id="btn-j3-back">Volver</button> 
+        <h2>Juego 3</h2>
+        <p>Juego 3 acá...</p>
+      </div>
+      <script src="./js/app.js" type="module"></script>
+      <script src="./js/tatetiapp.js" type="module"></script>
+    </body>
+</html>

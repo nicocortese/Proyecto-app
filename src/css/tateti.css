@@ -1,0 +1,63 @@
+#j1 body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 0;
+  }
+  
+#j1 h1 {
+    margin-top: 20px;
+  }
+  
+#j1 #tablero {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+    margin: 20px auto;
+    width: max-content;
+  }
+  
+#j1 .celda {
+    background-color: #fff;
+    border: 2px solid #000;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-sizing: border-box; 
+  }
+  
+#j1.celda.ganador {
+    background-color: yellow;
+  }
+  
+#j1 button {
+    padding: 10px 20px;
+    font-size: 1.2em;
+    margin-top: 20px;
+  }
+  
+#j1 button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+#j1 .ganador {
+    font-size: 1.5em;
+    color: blue;
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+#j1 .ganador.empate {
+    color: gray;
+  }
+  
+#j1 .celda.bloqueada {
+    cursor: not-allowed;
+  }
+  

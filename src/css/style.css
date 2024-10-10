@@ -1,0 +1,70 @@
+/* Estilo general */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}
+
+.form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+h2 {
+  text-align: center;
+  color: black;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  color: #666;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.nodisp {
+  display: none !important;
+}
+
+
+
+
+#j2 { 
+  background-color:darkblue;
+  color: white;
+}
+
+#j3{ 
+  background-color: chartreuse;
+}
+
+.game, #perfil {
+  padding: 0;
+  padding-top: env(safe-area-inset-top); /*notch*/
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
