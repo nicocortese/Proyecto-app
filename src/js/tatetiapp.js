@@ -42,10 +42,12 @@ function handleCellClick(event) { // funcion que se ejecuta al clickear la celda
         gameOver = true; // si hay victoria, da como terminado el juego
         mostrarMensaje(`¡${jugador} es el ganador!`); // mostramos el mensaje con el ganador
         resetButton.disabled = false; // habilita el boton de reseteo
+        document.getElementById("btn-j1-back").disabled = false;
     } else if (checkTie()) { // si no hay victoria, verifica si hay empate
         gameOver = true; // si hay empate termina el juego
         mostrarMensaje("¡Empate!"); 
         resetButton.disabled = false; // reseteo
+        document.getElementById("btn-j1-back").disabled = false;
     } else { // si no hay victoria ni empate, el juego sigue
         jugador = jugador === "X" ? "O" : "X"; // cambia el turno del jugador
     }
@@ -99,6 +101,7 @@ function resetGame() { // declara una funcion llamada resetGame que no toma para
     jugador = tirarMoneda(); // devuelve un valor aleatorio que determina quien es el proximo jugador
     gameOver = false; // establece la variable gameOver en false que indica que el juego no termino
     resetButton.disabled = true; // hace que el boton este deshabilitado y no se pueda clickear
+    document.getElementById("btn-j1-back").disabled = true;
 }
 
 // inicializa el juego
