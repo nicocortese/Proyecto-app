@@ -1,22 +1,38 @@
 let dados;
+let selectedDados = [false, false, false, false, false];
 
-const initGame = () => {
-    dados = [0, 0, 0, 0, 0]
+    const initGame = () => {
+        dados = [0, 0, 0, 0, 0];
+        drawDados;
+    };
+
+    const drawDados = () => {
+        dados.forEach((dado, i) => {
+            document.getElementById(`dado${i + 1}`).innerHTML = dado;
+        
+
+    if (selectedDados[i]) {
+        dadoElement.style.backgroundColor= "lightgreen";
+    } else {
+        dadoElement.style.backgroundColor= "red";
+            }
+        });
+    };
+
+const toggleSelection = (i) => {
+    selectedDados[i] = !selectedDados[i]
+    drawDados();
 }
 
-/*const drawDados = () => {
-    dados.forEach((dados, i) => document.querySelector (`.dados-container .dados.d))
-}*/
+    const tirarDados = () => {
+        for (let i = 0; i < dados.length; i++) {
+            if (selectedDados[i]) {
+            dados[i] = Math.floor(Math.random() * 6) + 1;
+        }
+    }
+        drawDados();
+    };
 
+    document.getElementById("btn-tirar").addEventListener("click", tirarDados);
 
-
-/*const tirarDado() {
-    for (let i = 1; i <= 5; i++) {
-        dados[i] = Math.floor(Math.random() * 6) + 1);
-        document.getElementById(`dados${i}`).textContent = dadoValue;
-    }
-}
-*/document.getElementById("btn-tirar").addEventListener('click', tirarDado);+
-
-
-document.addEventListener("DOMContentLoaded", () => { initGame() });
+    document.addEventListener("DOMContentLoaded", () => { initGame(); });
