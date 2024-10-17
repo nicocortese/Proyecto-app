@@ -53,12 +53,12 @@ input {
 
 
 #j2 { 
-  background-color:darkblue;
+  background-color:green;
   color: white;
 }
 
 #j3{ 
-  background-color: chartreuse;
+  background-color: dark blue;
 }
 
 .game, #perfil {
@@ -67,4 +67,15 @@ input {
   margin: 0;
   width: 100vw;
   height: 100vh;
+}
+
+.dados {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  display: inline-block;
+  padding: 10px;
+  margin: 20px;
 }
