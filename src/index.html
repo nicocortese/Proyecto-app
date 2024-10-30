@@ -12,6 +12,7 @@
     <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="./css/style.css"/>
     <link rel="stylesheet" href="./css/tateti.css"/>
+    <link rel="stylesheet" href="./css/generala.css"/>
 
     </head>
     <body>
@@ -57,12 +58,24 @@
         <button id="btn-j2-back">Volver</button> 
         <h2>Generala</h2>
 
+        <img id="d0" src="./assets/imgs/dado-0.svg" alt="d0" class="nodisp">
+        <img id="d1" src="./assets/imgs/dado-1.svg" alt="d1" class="nodisp">
+        <img id="d2" src="./assets/imgs/dado-2.svg" alt="d2" class="nodisp">
+        <img id="d3" src="./assets/imgs/dado-3.svg" alt="d3" class="nodisp">
+        <img id="d4" src="./assets/imgs/dado-4.svg" alt="d4" class="nodisp">
+        <img id="d5" src="./assets/imgs/dado-5.svg" alt="d5" class="nodisp">
+        <img id="d6" src="./assets/imgs/dado-6.svg" alt="d6" class="nodisp">
+
           <div id= "dados-container">
             <div class="dado d0"></div>
             <div class="dado d1"></div>
             <div class="dado d2"></div>
             <div class="dado d3"></div>
             <div class="dado d4"></div>
+          </div>
+
+          <div class="juego-state">
+            Turno del jugador: <span id="jugador-generala"></span>, Tirada: <span id="tiros-generala"></span>
           </div>
         <button id="btn-tirar">Tirar dados</button>
 
