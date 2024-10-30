@@ -68,3 +68,14 @@ input {
   width: 100vw;
   height: 100vh;
 }
+
+.dado {
+  border: 2px solid transparent;
+  display: inline-block;
+  padding: 10px;
+  margin: 20px;
+}
+
+.dado.selected {
+  border: 2px solid red;
+}
