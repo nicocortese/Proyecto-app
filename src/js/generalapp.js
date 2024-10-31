@@ -15,84 +15,203 @@ const game = {
     players: 2,
     turn: 1,
     moves: 1,
+    scores:[],
 }
 
-    const initGame = () => {
-        game.dados = [0, 0, 0, 0, 0];
-        selectedDados = [false, false, false, false, false];
-        game.turn = 1;
-        game.moves = 1;
+const initGame = () => {
+    game.dados = [0, 0, 0, 0, 0];
+    game.selectedDados = [false, false, false, false, false];
+    game.turn = 1;
+    game.moves = 1;
 
-        document.querySelectorAll("#dados-container .dado").forEach(dadoElement => {
-            dadoElement.addEventListener("click", () => toggleSelection(parseInt(dadoElement.getAttribute("class").replace("dado d", ""))));
-        })
+    document.querySelectorAll("#dados-container .dado").forEach(dadoElement => {
+        dadoElement.addEventListener("click", () => toggleSelection(parseInt(dadoElement.getAttribute("class").replace("dado d", ""))));
+    })
 
-        drawDados();
-        drawState();
+    drawDados();
+    drawState();
+    drawScores();
+}
+
+const drawScores = () => {
+    const cont = document.querySelector("#j2 .scores table thead tr");
+    contHeader.innerHTML = null;
+    const cellGameName = document.createElement("td");
+    cellGameName.innerHTML = "Juego";
+    contHeader.appendChild(cellGameName);
+    for (let i = 0; i < game.players.lentgh; i++) {
+        const cellPlayerName = document.createElement("th");
+        cellPlayerName.innerHTML = `J${i + 1}`; // En la app, uso el nick del jugador guardado
+        contHeader.appendChild(cellPlayerName);
     }
-
-    const isGameMatch = regex => {
-        return game.dados.slice().sort((d1, d2) => d1 - d2).join("").match(regex) !== null;
-    }
-    
-
-    const drawDados = () => {
-        game.dados.forEach((dado, i) => {
-            const dadoElement = document.querySelector(`#dados-container .dado d${i}`);
-            if (selectedDados[i]) {
-                dadoElement.classList.add("selected");
+    //Juegos
+    const contGames = document.querySelector("#j2 .score table tbody tr");
+    for (let i = 0; i < 11; i++) {
+        const cellGameName = document.createElement("td");
+        cellGameName.innerHTML = getGameName(i);
+        contGames.appendChild(cellGameName);
+        for (let p = 0; p < game.players; p++) {
+            const cellPlayerScore = document.createElement("td");
+            cellPlayerScore.innerHTML = game.scores[p][i];
+            contGames.appendChild(cellPlayerScore);
+        }
+        contGames.appendChild(contGame);
+        contGame.addEventListener("click", () => {
+            if (game.dados.some(dado => dado === 0)) { // Todavía no se tiran los dados
+                return;
+            }
+            if (game.scores[game.turn - 1][i] !== " ") { // Juego ya anotado
+                alert(`Ya se anotó el juego ${getGameName(i)}`);
+                return;
             } else {
-                dadoElement.classList.add("selected");
+                const score = calculateScore(i);
+                game.scores[game.turn - 1][i] = score === 0 ? "X" : score; // Puntaje del juego
+                game.scores[game.turn]
+
+                drawScores();
+                changePlayerTurn();
             }
-            dadoElement.innerHTML = dado
-        });
+        }); 
     }
+    //Total
+    const contTotal = document.createElement("tr");
+    const cellTotalName = document.createElement("th");
+    cellTotalName.innerHTML = "Total";
+    contTotal.appendChild(cellTotalName);
+    for (let p = 0; p < game.players; p++) {
+        const cellPlayerTotal = document.createElement("td");
+        cellPlayerTotal.innerHTML = game.scores[p][11];
+        contTotal.appendChild(cellPlayerTotal)
+    }
+    document.querySelector()
+}
 
-   const drawState = () =>
-    document.getElementById("jugador-generala").innerHTML = game.turn;
-    document.getElementById("tiros-generala").innerHTML = game.moves;
-   
+const isGameMatch = regex => {
+    return game.dados.slice().sort((d1, d2) => d1 - d2).join("").match(regex) !== null;
+}
 
-    const tirarDados = () => {
-        for (let i = 0; i < game.dados.length; i++) {
-            if (game.moves === 1 || game.selectedDados[i]) {
-                game.dados[i] = Math.floor(Math.random() * 6) + 1;
-            }
-        }
-        selectedDados = [false, false, false, false, false] // Reseteo de selección 
-        drawDados();
+const calculateScore = which => {
+    let score = 0;
+    switch (whichGame) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    //computar puntaje para los numeros
+    break;
+    case 6: 
+    if (isGameMatch(reEscalera)) {
+        score = game.moves === 2 ? 25 : 20;
+    }
+    break;
+    case 7: 
+    if (isGameMatch(reFull)) {
+        score = game.moves === 1 ? 35 : 30;
+    }
+    break;
+    case 8: 
+    if (isGameMatch(rePoker)) {
+        score = game.moves === 1 ? 45 : 40;
+    }
+    break;
+    case 9: 
+    if (isGameMatch(reGenerala)) {
+        score = game.moves === 1 ? 55 : 50;
+    }
+    break;
+    case 10: 
+    if (isGameMatch(reGenerala)) {
+        score = game.moves === 1 ? 105 : 100;
+    }
+    //si conincide con la reGenerala
+    //y si es primer tiro devuelve 105, sino 100
+    break;
+default:
+        // Números 1-6
+        score = game.dados.filter(dado => dado === whichGame + 1).reduce((acc, cur) => acc + cur, 0);
+        break;
+    }
+    return score;
+}
 
-        game.moves++;
-        if (game.moves > 3) {
-            game.turn++;
-            if (game.turn > game.players) {
-                game.turn = 1;
-            }
-            game.moves = 1;
-        }
-        drawState();
-    };
-
-    const toggleSelection = dadoNumero => {
-        selectedDados[dadoNumero] =! selectedDados[dadoNumero];
-        const dadoElement = document.querySelector(`#dados-container .dado .d${dadoNumero}`);
-        if (selectedDados[dadoNumero]) {
+const drawDados = () => {
+    game.dados.forEach((dado, i) => {
+        const dadoElement = document.querySelector(`#dados-container .d${i}`);
+        if (game.selectedDados[i]) {
             dadoElement.classList.add("selected");
         } else {
             dadoElement.classList.remove("selected");
         }
+        dadoElement.innerHTML = dado;
+    });
+}
+
+const drawState = () => {
+    document.getElementById("jugador-generala").innerHTML = game.turn;
+    document.getElementById("tiros-generala").innerHTML = game.moves;
+}
+
+
+const showDados = (contDiv, number) => {
+    contDiv.innerHTML = null;
+    let canvas = document.createElement("canvas");
+    canvas.setAttribute("width", "" + DICE_SIZE);
+    canvas.setAttribute("height", "" + DICE_SIZE);
+    drawDados(canvas, number);
+    contDiv.appendChild(canvas);
+}
+
+
+
+
+
+const tirarDados = () => {
+    for (let i = 0; i < game.dados.length; i++) {
+        if (game.moves === 1 || game.selectedDados[i]) {
+            game.dados[i] = Math.floor(Math.random() * 6) + 1;
+        }
     }
+    game.selectedDados = [false, false, false, false, false]; // Reseteo de selección
+    drawDados();
 
-    const showDado = (contDiv, number) => {
-        contDiv.innerHTML = null;
-        let img = document.createElement("img");
-        img.setAttribute("width", "" + DICE_SIZE);
-        img.setAttribute("height", "" + DICE_SIZE);
-        img.setAttribute("alt", `dado-${number}`);
-        img.setAttribute("src", document.getElementById(`d${number}`).getAttribute("src"));
-        contDiv.appendChild(img);
-    }  
+    console.log("---");
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].forEach(whichGame => console.log(`Game ${getGameName(whichGame)}`))
 
-    document.getElementById("btn-tirar").addEventListener("click", tirarDados);
+    game.moves++;
+    if (game.moves > 3) {
+        game.turn++;
+        if (game.turn > game.players) {
+            game.turn = 1;
+        }
+        game.moves = 1;
+    }
+    drawState();
+};
 
-    document.addEventListener("DOMContentLoaded", () => { initGame(); });
+const changePlayerTurn = () => {
+    game.dados = [0, 0, 0, 0, 0];
+    game.selectedDados = [false, false, false, false, false];
+    game.moves = 1;
+    game.turn++;
+    if (game.turn > game.players){
+        game.turn = 1;
+    }
+    
+}
+
+const toggleSelection = dadoNumero => {
+    game.selectedDados[dadoNumero] = !game.selectedDados[dadoNumero];
+    const dadoElement = document.querySelector(`#dados-container .d${dadoNumero}`);
+    if (game.selectedDados[dadoNumero]) {
+        dadoElement.classList.add("selected");
+    } else {
+        dadoElement.classList.remove("selected");
+    }
+}
+
+
+document.getElementById("btn-tirar").addEventListener("click", tirarDados);
+
+document.addEventListener("DOMContentLoaded", () => { initGame(); });

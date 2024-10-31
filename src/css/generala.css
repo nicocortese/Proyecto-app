@@ -12,3 +12,25 @@
 #jugador-generala, #tiros-generala {
     font-weight: bolder;
 }
+
+#j2 .scores {
+  margin: 1rem;
+  font-size: 1.25rem;
+}
+
+#j2 .scores table {
+  border-collapse: collapse;
+}
+
+#j2 .scores th, #j2 .scored td{
+  padding: 0,25rem;
+  min-width: 4rem;
+  text-align: center;
+  border: 1px solid white;
+}
+
+
+#j2 .scores table tr:last-of-type td{
+  font-weight: bold;
+
+}
