@@ -1,8 +1,15 @@
+#j2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px; /* Añadido para evitar que el contenido toque los bordes */
+}
 .dado {
     border: 2px solid transparent;
     display: inline-block;
     padding: 10px;
-    margin: 20px;
   }
   
   .dado.selected {
@@ -22,15 +29,24 @@
   border-collapse: collapse;
 }
 
-#j2 .scores th, #j2 .scored td{
+#j2 .scores th, #j2 .scores th{
   padding: 0,25rem;
   min-width: 4rem;
   text-align: center;
   border: 1px solid white;
 }
 
+#j2 .scores table tbody tr {
+  cursor: pointer;
+}
 
-#j2 .scores table tr:last-of-type td{
+#j2 .scores table tbody tr:last-of-type td{
   font-weight: bold;
+  cursor: default;
+}
 
+.scores table, .scores th, .scores td {
+  border: 1px solid white;
+  border-collapse: collapse;
+  color: white;
 }

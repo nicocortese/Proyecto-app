@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="es" dir="ltr">
   <head>
     <meta charset="UTF-8" />
     <title>Datos a llenar</title>
@@ -22,18 +22,7 @@
         <button id="btn-j2">Juego 2</button>
         <button id="btn-j3">Juego 3</button>
       </div>
-      <div id="perfil" class="nodisp">
-        <h2>Perfil</h2>
-        <form>
-          <label for="name">Nombre: </label>
-          <input id="name" name="name" />
-          <br>
-          <label for="nick">Apodo: </label>
-          <input id="nick" name="nick" />
-          <br>
-          <input id="savePreferences" type="submit" value="Guardar">
-          </form>
-      </div>
+    
       <div id="j1" class="game nodisp">
        <button id="btn-j1-back">Volver</button> 
         <h2>Ta Te Ti</h2>
@@ -58,7 +47,7 @@
         <button id="btn-j2-back">Volver</button> 
         <h2>Generala</h2>
 
-          <div id= "dados-container">
+          <div class="dados-container">
             <div class="dado d0"></div>
             <div class="dado d1"></div>
             <div class="dado d2"></div>
@@ -77,8 +66,9 @@
             <tbody></tbody>
           </table>
         </div>
-
       </div>
+
+
       <div id="j3" class="game nodisp">
         <button id="btn-j3-back">Volver</button> 
         <h2>Juego 3</h2>
@@ -86,5 +76,6 @@
       </div>
       <script src="./js/app.js" type="module"></script>
       <script src="./js/tatetiapp.js" type="module"></script>
+      <script src= "./js/generalapp.js" type="module"></script>
     </body>
 </html>
