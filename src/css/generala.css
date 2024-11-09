@@ -50,3 +50,9 @@
   border-collapse: collapse;
   color: white;
 }
+
+.turnoColor {
+  background-color: blue; /* Cambia el color a tu preferencia */
+  font-weight: bold;
+}
+

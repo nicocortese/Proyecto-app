@@ -1,4 +1,4 @@
-const DICE_SIZE = 100;
+const DICE_SIZE = 80;
 const DOT_RADIUS = 0.1 * DICE_SIZE;
 const AT_QUARTER = 0.25 * DICE_SIZE;
 const AT_HALF = 0.5 * DICE_SIZE;
@@ -38,7 +38,7 @@ const initGame = () => {
     dadoElement.addEventListener("click", () => toggleDadoSelection(i));
     /*document.querySelectorAll(".dado-container .dado").forEach(dadoElement => {
         dadoElement.addEventListener("click", () => toggleDadoSelection(parseInt(dadoElement.getAttribute("class").replace("dado d", ""))));*/
-
+    document.getElementById("btn-j2-back").disabled = true;
 });
 
     drawDados();
@@ -57,6 +57,11 @@ const drawScores = () => {
     for (let i = 0; i < game.players; i++) {
         const cellPlayerName = document.createElement("th");
         cellPlayerName.innerHTML = `J${i + 1}`; // Usa el nick guardado en la app en vez de `J1`
+        if (i + 1 === game.turn) {
+            cellPlayerName.classList.add("turnoColor");
+        } else {
+            cellPlayerName.classList.remove("turnoColor")
+        }
         contHeader.appendChild(cellPlayerName);
     }
 
@@ -73,6 +78,11 @@ const drawScores = () => {
         for (let p = 0; p < game.players; p++) {
             const cellPlayerScore = document.createElement("td");
             cellPlayerScore.innerHTML = game.scores[p][i];
+            if (p + 1 === game.turn) {
+                cellPlayerScore.classList.add("turnoColor");
+            } else {
+                cellPlayerScore.classList.remove("turnoColor")
+            }
             contGame.appendChild(cellPlayerScore);
         }
         contGames.appendChild(contGame);
@@ -102,7 +112,13 @@ const drawScores = () => {
     for (let p = 0; p < game.players; p++) {
         const cellPlayerTotal = document.createElement("td");
         cellPlayerTotal.innerHTML = game.scores[p][11];
+        if ( p + 1 === game.turn) {
+            cellPlayerTotal.classList.add("turnoColor");
+        } else {
+            cellPlayerTotal.classList.remove("turnoColor")
+        }
         contTotal.appendChild(cellPlayerTotal);
+
     }
     contGames.appendChild(contTotal);
 };
@@ -216,6 +232,7 @@ const changePlayerTurn = () => {
         document.getElementById("btn-tirar").removeAttribute("disabled");
         drawDados();
         drawState();
+        drawScores();
     }
     
 
@@ -247,6 +264,7 @@ const gameOver = () => {
         }
     }
     alert(`J${winner} Ganó con ${winningScore} puntos`);
+    document.getElementById("btn-j2-back").disabled = false;
 }
 
 /* Draw dices code begins */
