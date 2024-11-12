@@ -4,6 +4,20 @@ const AT_QUARTER = 0.25 * DICE_SIZE;
 const AT_HALF = 0.5 * DICE_SIZE;
 const AT_3QUARTER = 0.75 * DICE_SIZE;
 
+//Modals
+const modalTachar = document.getElementById("modal-tachar");
+const tacharJugada = document.getElementById("tachar");
+const noTacharJugada = document.getElementById("seguir");
+
+const modalGenerala = document.getElementById("modal-generala");
+const cerrarMGenerala = document.getElementById("cerrarModalGenerala");
+
+const anotarGenerala = document.getElementById("anotar-generala");
+const cerrarGeneralaA = document.getElementById("cerrarAnotarGenerala");
+
+
+
+
 const reEscalera = /12345|23456|13456/;
 const reGenerala = /1{5}|2{5}|3{5}|4{5}|5{5}|6{5}/;
 const rePoker = /1{4}[23456]|12{4}|2{4}[3456]|[12]3{4}|3{4}[456]|[123]4{4}|4{4}[56]|[1234]5{4}|5{4}6|[12345]6{4}/;
@@ -20,13 +34,13 @@ const game = {
 }
 
 const initGame = () => {
-    game.dados = [0, 0, 0, 0, 0];
+    game.dados = [4, 4, 4, 4, 4];
     game.selectedDados = [false, false, false, false, false];
     game.turn = 1;
     game.moves = 0;
     game.scores = [];
 
-    /*for (let p = 0; i < game.players; i++){
+    /*for (let i = 0; i < game.players; i++){
         game.scores.push([" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", 0]);
     }*/
    for (let p = 0; p < game.players; p++){
@@ -87,21 +101,66 @@ const drawScores = () => {
         }
         contGames.appendChild(contGame);
         contGame.addEventListener("click", () => {
-            if(game.dados.some(dado => dado === 0)) { // Todavía no se tiraron los dados
+            if (game.dados.some(dado => dado === 0)) { // Verifica que los dados hayan sido lanzados
                 return;
             }
-            if (game.scores[game.turn - 1][i] !== "-") { // Juego ya anotado
-                alert(`Ya se anotó el juego ${getGameName(i)}`);
+            if (game.scores[game.turn - 1][i] !== "-") { // Evita anotar en una casilla ya ocupada
+                // Acá va un modal de que juego ya anotado
+                return; // Si ya está anotado, no hace nada
+            }
+            
+            // Caso especial para Generala
+            if (getGameName(i) === "Generala") {
+                // Si la Doble no está tachada y el puntaje de la Generala es 0, no se puede anotar la Generala
+                if (game.scores[game.turn - 1][10] !== "X" && calculateScore(i) === 0) {
+                    modalGenerala.style.display = "block";
+                    // Cerrar modal de Generala al hacer clic en el botón
+                    cerrarMGenerala.onclick = () => {
+                        modalGenerala.style.display = "none";
+                    };
+                    return; // No deja continuar si la Doble no está tachada y el puntaje es 0
+                }
+            // Caso especial para la Doble
+            if(getGameName(i) === "Doble") {
+                 // Verifico si la generala no está anotada
+                 if (game.scores[game.turn - 1][9] === "-") {
+                // Si la generala no fue anotada, modal
+                anotarGenerala.style.display = "block";
+                cerrarGeneralaA.onclick = () => {
+                    anotarGenerala.style.display = "none";
+                }
                 return;
+                }
+            }
+        }
+        
+            const score = calculateScore(i);
+        
+            if (score === 0) {  // Si el puntaje es cero, se muestra el modal de tachar
+                modalTachar.style.display = "block";
+        
+                // Opción para tachar la jugada
+                tacharJugada.onclick = () => {
+                    modalTachar.style.display = "none";
+                    game.scores[game.turn - 1][i] = "X"; // Marca la jugada como tachada
+                    drawScores();  
+                    changePlayerTurn(); 
+                };
+
+                //No tachar la jugada
+                noTacharJugada.onclick = () => {
+                    modalTachar.style.display = "none";
+                }
             } else {
-                const score = calculateScore(i);
-                game.scores[game.turn - 1][i] = score === 0 ? "X" : score; // Puntaje del juego
-                game.scores[game.turn -1][11] += score; // Puntaje total del jugador
+                // Si el puntaje no es cero, se guarda y se continúa el juego
+                game.scores[game.turn - 1][i] = score;
+                game.scores[game.turn - 1][11] += score; // Puntaje total del jugador
                 drawScores();
                 changePlayerTurn();
             }
-        })
+        });
     }
+    
 
     // Total
     const contTotal = document.createElement("tr");
@@ -258,7 +317,7 @@ const gameOver = () => {
     let winner = 0;
     let winningScore = 0;
     for (let i = 0; i < game.players; i++) {
-        if (game.scores[i][11] > winningScore) {
+        if (game.scores[i][p][11] > winningScore) {
             winningScore = game.scores[i][11];
             winner = i;
         }

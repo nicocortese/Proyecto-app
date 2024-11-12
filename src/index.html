@@ -47,6 +47,13 @@
         <button id="btn-j2-back">Volver</button> 
         <h2>Generala</h2>
 
+        <div type="modal" id="modal-tachar">
+        <h2 id="textoModal">¿Deseas tachar esta jugada?</h2>  
+          <button id="tachar">Tachar</button>
+          <button id="seguir">Seguir jugando</button>
+        </div>
+
+          
           <div class="dados-container">
             <div class="dado d0"></div>
             <div class="dado d1"></div>
@@ -60,12 +67,22 @@
           </div>
         <button id="btn-tirar">Tirar dados</button>
 
+        <div type="modal" id="modal-generala">
+          <p id="textoModalGenerala">No podés tachar Generala sin antes tachar Doble</p>
+          <button id="cerrarModalGenerala">Cerrar</button>
+        </div>
+
+          <div type="modal" id="anotar-generala">
+            <p id="textoAnotarGenerala">No podés anotar Doble sin antes anotar Generala</p>
+            <button id="cerrarAnotarGenerala"></button>
+          </div>
         <div class="scores">
           <table>
             <thead><tr></tr></thead>
             <tbody></tbody>
           </table>
         </div>
+        <button id="reset" disabled>Reiniciar</button>
       </div>
 
 

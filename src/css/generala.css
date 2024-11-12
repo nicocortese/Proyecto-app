@@ -56,3 +56,75 @@
   font-weight: bold;
 }
 
+#modal-tachar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: red;
+  display:none;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 90%;
+  max-width: 600px;
+  min-height: 90%;
+  height: auto;
+  border-radius: 10px;
+  padding: 3em 2.5em;
+  
+}
+
+#modal-tachar h2{
+  color: black;
+  font-weight: bold;
+  font-size: 1em;
+  
+}
+
+#tacharONo {
+  height: 50px;  
+  width: 100px;
+  padding: 2em 1,5em;
+  font-size: 1em;
+
+}
+
+#modal-generala {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: orange;
+  display:none;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 90%;
+  max-width: 600px;
+  min-height: 90%;
+  height: auto;
+  border-radius: 10px;
+  padding: 3em 2.5em;
+}
+
+#anotar-generala {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(85, 134, 150);
+  display:none;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  width: 90%;
+  max-width: 600px;
+  min-height: 90%;
+  height: auto;
+  border-radius: 10px;
+  padding: 3em 2.5em;
+}
