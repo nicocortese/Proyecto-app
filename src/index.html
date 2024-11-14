@@ -17,12 +17,14 @@
     </head>
     <body>
       <div id="main">
-        <h2>Mis juegos</h2>
+        <h2>Bienvenid@ a los juegos finales</h2>
+        <h3>Elegí el juego que deseas</h3>
         <button id="btn-j1">Jugá al Ta-Te-Ti</button>
         <button id="btn-j2">Jugá a la Generala</button>
-        <button id="btn-j3">Por ahora no juegues</button>
+        <button id="btn-j3" disabled>Menos este, por ahora no juegues</button>
       </div>
     
+      <!--JUEGO 1-->
       <div id="j1" class="game nodisp">
        <button id="btn-j1-back">Volver</button> 
         <h2>Ta Te Ti</h2>
@@ -37,14 +39,23 @@
           <div class="celda"></div>
           <div class="celda"></div>
       </div>
+      <div type="modal" id="modalGanador">
+        <p id="cerrar-modal">&times;</p>
+        <h2 id="mensaje-modal"></h2>
+      </div>
+
       <h2 class="ganador"></h2>
-    <h2>Turno del jugador: <span id="jugador">X</span></h2>
+    <h2 id="turno">Turno del jugador: <span id="jugador" class="turnoJugador">X</span></h2>
 
     <button id="reset" disabled>Reiniciar</button>
-
       </div>
+
+      <!--JUEGO 2-->
       <div id="j2" class="game nodisp">
         <button id="btn-j2-back">Volver</button> 
+          <div type="modal" id="modal-winner">
+            <p id="textoModalWinner">¡Que orgullo! Jugador <span id="nameWinner"></span> ganaste con <span id="scoreWinner">puntos</span></p>
+          </div>
         <h2>Generala</h2>
 
         <div type="modal" id="modal-tachar">
@@ -63,29 +74,35 @@
           </div>
 
           <div class="juego-state">
-            Turno del jugador: <span id="jugador-generala"></span>, Tirada: <span id="tiros-generala"></span>
+            Turno del jugador: <span id="jugador-generala"></span> Tirada: <span id="tiros-generala"></span> Ronda: <span id="ronda-generala"></span>
           </div>
         <button id="btn-tirar">Tirar dados</button>
+        <button id="resetG" disabled>Reiniciar</button>
 
-        <div type="modal" id="modal-generala">
-          <p id="textoModalGenerala">No podés tachar Generala sin antes tachar Doble</p>
-          <button id="cerrarModalGenerala">Cerrar</button>
+        <div type="modal" id="modalt-generala">
+          <p id="textoModalTGenerala">No podés tachar Generala sin antes tachar Doble</p>
+          <button id="cerrarModalTGenerala">Cerrar</button>
         </div>
 
           <div type="modal" id="anotar-generala">
             <p id="textoAnotarGenerala">No podés anotar Doble sin antes anotar Generala</p>
-            <button id="cerrarAnotarGenerala"></button>
+            <button id="cerrarAnotarGenerala">Cerrar</button>
           </div>
+          <div type ="modal" id="celda-ocupada">
+            <p id="textoOcupado">Esta celda ya está ocupada</p>
+            <button id="cerrarOcupada">Cerrar</button>
+          </div>
+      
+          
         <div class="scores">
           <table>
             <thead><tr></tr></thead>
             <tbody></tbody>
           </table>
         </div>
-        <button id="reset" disabled>Reiniciar</button>
-      </div>
+       
 
-
+      <!--JUEGO 3-->
       <div id="j3" class="game nodisp">
         <button id="btn-j3-back">Volver</button> 
         <h2>Juego 3</h2>

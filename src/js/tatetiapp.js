@@ -12,6 +12,10 @@ const winConditions = [
     [2, 4, 6]
 ]; 
 
+const modal = document.getElementById("modalGanador");
+const mensajeModal = document.getElementById("mensaje-modal");
+const cerrarModal = document.getElementById("cerrar-modal");
+
 let jugador = "X";
 let gameOver = false;
 
@@ -26,9 +30,67 @@ cells.forEach(cell => { // bucle que recorre cada celda
 function changeTurn() {
     jugador = jugador === "X" ? "O" : "X";
     document.getElementById("jugador").textContent = jugador; 
+    const turnoJugador = document.getElementById("jugador");
+
+    if (jugador === "X") {
+        turnoJugador.classList.add("turno-x");
+        turnoJugador.classList.remove("turno-o");
+    } else {
+        turnoJugador.classList.add("turno-o");
+        turnoJugador.classList.remove("turno-x");
+    }
 }
 
 resetButton.addEventListener("click", resetGame); // habilita el mouse para el boton de reseteo
+
+function modalGanador(mensaje) {
+    mensajeModal.textContent = mensaje;
+    modal.style.display = "block";
+    if (mensaje === "¡Empate!") {
+        modal.style.backgroundColor = "#95a5a6"; // Gris si es empate:
+        mensajeModal.style.color = "#2c3e50";
+    }else if (jugador === "X") {
+        modal.style.backgroundColor = "#e74c3c"; // Azul si gana X
+    } else if (jugador === "O") {
+        modal.style.backgroundColor = "#3498db"; // Rojo si gana O
+    }
+    
+    const backButton = document.getElementById("btn-j1-back");
+    const resetButton = document.getElementById ("reset");
+
+    backButton.setAttribute("disabled", "disabled");
+    resetButton.setAttribute("disabled", "disabled");
+
+    backButton.classList.add("disabled");
+    resetButton.classList.add("disabled");
+}
+        cerrarModal.addEventListener("click", () => {
+            modal.style.display = "none"; // Oculta el modal si se hace clic fuera de él
+            const backButton = document.getElementById("btn-j1-back");
+            const resetButton = document.getElementById("reset");
+
+            backButton.removeAttribute("disabled");
+            resetButton.removeAttribute("disabled");
+        
+            backButton.classList.remove("disabled");
+            resetButton.classList.remove("disabled");
+    });
+        window.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+
+                const backButton = document.getElementById("btn-j1-back");
+                const resetButton = document.getElementById("reset");
+
+                backButton.removeAttribute("disabled");
+                resetButton.removeAttribute("disabled");
+        
+                backButton.classList.remove("disabled");
+                resetButton.classList.remove("disabled");
+            }
+        })
+    
+        
 
 function handleCellClick(event) { // funcion que se ejecuta al clickear la celda
     const cell = event.target; // celda en la que se clickeo|
@@ -36,20 +98,26 @@ function handleCellClick(event) { // funcion que se ejecuta al clickear la celda
         return; // si se cumple la condicion, termina
     }
     cell.textContent = jugador; // coloca al jugador (X u O)
+
+    if (jugador === "X"){
+        cell.classList.add("pintar-x");
+    } else {
+        cell.classList.add("pintar-o");
+    }
     cell.classList.add('bloqueada'); // Bloquea la casilla
 
     if (checkWin()) { // verifica si el movimiento es una victoria
         gameOver = true; // si hay victoria, da como terminado el juego
-        mostrarMensaje(`¡${jugador} es el ganador!`); // mostramos el mensaje con el ganador
+        modalGanador(`¡${jugador} es el ganador!`); // mostramos el mensaje con el ganador
         resetButton.disabled = false; // habilita el boton de reseteo
         document.getElementById("btn-j1-back").disabled = false;
     } else if (checkTie()) { // si no hay victoria, verifica si hay empate
         gameOver = true; // si hay empate termina el juego
-        mostrarMensaje("¡Empate!"); 
+        modalGanador("¡Empate!"); 
         resetButton.disabled = false; // reseteo
         document.getElementById("btn-j1-back").disabled = false;
     } else { // si no hay victoria ni empate, el juego sigue
-        jugador = jugador === "X" ? "O" : "X"; // cambia el turno del jugador
+        changeTurn(); // cambia el turno del jugador
     }
   }
 // verifica si un jugador gano el juego
@@ -96,12 +164,17 @@ function resetGame() { // declara una funcion llamada resetGame que no toma para
         cell.textContent = ""; // borra cualquier texto contenido en la celda actual
         cell.style.backgroundColor = ""; // restaura el color de fondo al original
         cell.classList.remove('bloqueada'); // elimina la clase 'bloqueada' para desbloquear las celdas
+        cell.classList.remove('pintar-x', 'pintar-o'); // Elimina las clases de color X y O
     });
     statusDisplay.style.display = 'none'; // hace que el elemento HTML con el id statusDisplay no sea visible en la pantalla escondiendo su contenido.
     jugador = tirarMoneda(); // devuelve un valor aleatorio que determina quien es el proximo jugador
+    document.getElementById("jugador").textContent = jugador; // Actualizar el elemento HTML que muestra el turno
     gameOver = false; // establece la variable gameOver en false que indica que el juego no termino
     resetButton.disabled = true; // hace que el boton este deshabilitado y no se pueda clickear
     document.getElementById("btn-j1-back").disabled = true;
+    const tablero = document.getElementById("tablero");
+    tablero.style.width = "300px"; 
+    tablero.style.height = "300px";
 }
 
 // inicializa el juego

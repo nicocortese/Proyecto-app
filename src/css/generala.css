@@ -1,130 +1,352 @@
+* {
+  font-family: 'Courier New', Courier, monospace;
+}
 #j2 {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
-  padding: 20px; /* Añadido para evitar que el contenido toque los bordes */
+  min-height: 100vh;
+  padding: 16px;
+  gap: 16px;
+  overflow: hidden;
 }
-.dado {
-    border: 2px solid transparent;
+
+#j2 h2 {
+  font-size: 32px;
+  margin: 8px 0;
+  color: black;
+}
+
+.dados-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0;
+  max-width: 100%;
+}
+
+.dado{
     display: inline-block;
-    padding: 10px;
+
   }
   
-  .dado.selected {
-    border: 2px solid red;
+  .selected{
+    border: 2px solid #EABE3F;
   }
 
-#jugador-generala, #tiros-generala {
+  .juego-state {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 1.2rem;
+    margin: 15px 0;
+    padding: 10px;
+    background: green;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .juego-state span {
     font-weight: bolder;
-}
+    color: black;  
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin: 0 5px;
+    display: inline-block;
+  }
+  
 
-#j2 .scores {
-  margin: 1rem;
-  font-size: 1.25rem;
-}
+  #btn-tirar, #resetG, #btn-j2-back {
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin: 8px;
 
-#j2 .scores table {
-  border-collapse: collapse;
-}
+  }
+  
+  #btn-tirar {
+    background: black;
+    color: white;
+  }
+  
+  #btn-tirar:hover:not([disabled]) {
+    background: black;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+  }
+  #resetG {
+    background: #ff4757;
+    color: white;
+  }
+  
+  #resetG:hover:not([disabled]) {
+    background: #ff3648;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 71, 87, 0.3);
+  }
+  
+  #btn-j2-back {
+    background:  #ff4757;
+    color: white;
+  }
+  
+  #btn-j2-back:hover:not([disabled]) {
+    background:#ff3648;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 71, 87, 0.3)
+  }
+  
+  button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* TABLA */
+  scores {
+    margin: 16px 0;
+    width: 100%;
+    max-width: 500px;
+    overflow-x: auto;
+  }
+  .scores table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+  }
+  .scores th, .scores td {
+    padding: 12px;
+    text-align: center;
 
-#j2 .scores th, #j2 .scores th{
-  padding: 0,25rem;
-  min-width: 4rem;
+  }
+  .scores th {
+    background: rgb(18, 94, 18);
+    font-size: 16px;
+  }
+  .scores td {
+    font-size: 15px;
+  }
+  
+  .scores tbody tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .turnoColor {
+    background: rgba(33, 150, 243, 0.3) !important;
+    font-weight: bold;
+  }
+
+  /* MODALS */
+  #modal-tachar, #modalt-generala, #anotar-generala, #modal-winner, #celda-ocupada {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 24px;
+  border-radius: 10px;
+  z-index: 1000;
+  display: none;
   text-align: center;
-  border: 1px solid white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
-#j2 .scores table tbody tr {
-  cursor: pointer;
-}
 
-#j2 .scores table tbody tr:last-of-type td{
-  font-weight: bold;
-  cursor: default;
-}
 
-.scores table, .scores th, .scores td {
-  border: 1px solid white;
-  border-collapse: collapse;
+#modal-tachar {
+  background: #ff4757;
   color: white;
 }
 
-.turnoColor {
-  background-color: blue; /* Cambia el color a tu preferencia */
-  font-weight: bold;
-}
-
-#modal-tachar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: red;
-  display:none;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  width: 90%;
-  max-width: 600px;
-  min-height: 90%;
-  height: auto;
-  border-radius: 10px;
-  padding: 3em 2.5em;
-  
-}
-
-#modal-tachar h2{
+#modalt-generala {
+  background: #ffa502;
   color: black;
-  font-weight: bold;
-  font-size: 1em;
-  
-}
-
-#tacharONo {
-  height: 50px;  
-  width: 100px;
-  padding: 2em 1,5em;
-  font-size: 1em;
-
-}
-
-#modal-generala {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: orange;
-  display:none;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  width: 90%;
-  max-width: 600px;
-  min-height: 90%;
-  height: auto;
-  border-radius: 10px;
-  padding: 3em 2.5em;
 }
 
 #anotar-generala {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgb(85, 134, 150);
-  display:none;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  width: 90%;
-  max-width: 600px;
-  min-height: 90%;
-  height: auto;
-  border-radius: 10px;
-  padding: 3em 2.5em;
+  background: #546de5;
+  color: white;
 }
+
+#modal-winner {
+  background: black;
+  color: white;
+  border-color: white;
+  box-shadow: white;
+}
+
+#celda-ocupada {
+  background: #ff6b6b;
+  color: white;
+}
+
+.modal-content {
+  font-size: 16px;
+  margin-bottom: 16px;
+}
+
+/* MODALS BOTONES */
+#modal-tachar button, #modalt-generala button, #anotar-generala button, #modal-winner button, #celda-ocupada button {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: green;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  margin: 6px;
+  background-color: white;
+  color: black;
+}
+
+#modal-tachar button {
+  border: 2px solid black;
+}
+#modal-tachar button:hover {
+  background: #ff3648;
+  color: gray;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+}
+
+#modalt-generala button {
+  border: 2px solid black;
+}
+
+#modalt-generala button:hover {
+  background: #ff9f1a;
+  color: gray;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+#anotar-generala button {
+  border: 2px solid white;
+}
+
+#anotar-generala button:hover {
+  background: #4a5de4;
+  color: gray;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+}
+#modal-winner button {
+  border: 2px solid white;
+  color: white;
+  background: transparent;
+}
+
+#modal-winner button:hover {
+  background: white;
+  color: gray;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+}
+
+
+#celda-ocupada button {
+  border: 2px solid white;
+}
+
+#celda-ocupada button:hover {
+  background: #ff5252;
+  color: gray;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.3);
+}
+
+
+/* MEDIAS QUERIES
+VERTICAL */
+@media screen and (orientation: portrait) and (max-width: 600px) {
+  #j2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 10px;
+    width: 100%;
+  }
+
+  #j2 h2 {
+    font-size: 18px;
+    text-align: center;
+    margin: 0;
+  }
+
+ 
+  #btn-j2-back {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .dados-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+    width: 100%;
+  }
+
+  .dado {
+    padding: 3px;
+    transform: scale(0.7);
+  }
+
+  .juego-state {
+    font-size: 14px;
+    padding: 5px 7px;
+    text-align: center;
+    width: 85%;
+  }
+
+  #btn-tirar, #resetG {
+    padding: 5px 8px;
+    font-size: 12px;
+    width: 30%; 
+
+  }
+
+  .scores {
+    transform: scale(1.1);
+    max-width: 100%;
+  }
+
+  .scores th, .scores td {
+    padding: 3px;
+    font-size: 11px;
+  }
+
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+  }
+}
+
+  .modal-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  #modal-tachar button,
+  #modalt-generala button,
+  #anotar-generala button,
+  #modal-winner button,
+  #celda-ocupada button {
+      padding: 8px 16px;
+      font-size: 12px;
+      margin: 4px;
+  }

@@ -1,9 +1,8 @@
-/* Estilo general */
+/* ESTILO GENERAL */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
 }
 
 body {
@@ -11,9 +10,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: white;
+  background: linear-gradient(140deg, white 0%, rgb(94, 134, 160) 100%);
 }
-
 
 h2 {
   text-align: center;
@@ -64,12 +62,12 @@ input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px; /* Espacio entre los elementos dentro de #main */
+  gap: 15px; 
 }
 
-#btn-j1 { background-color: #007bff; color: white; }
+#btn-j1 { background-color: #2c3e50; color: white; }
 #btn-j2 { background-color: green; color: white; }
-#btn-j3 { background-color: chartreuse; }
+#btn-j3 { background-color: red; color: black;}
 
 #btn-j1, #btn-j2, #btn-j3 {
   padding: 10px 20px;
@@ -77,4 +75,33 @@ input {
   border: none;
   border-radius: 4px;
   cursor: pointer;
+}
+
+/* Media Queries 
+VERTICAL*/
+@media screen and (min-height: 600px) {
+  #main {
+    padding: 20px;
+    justify-content: center;
+  }
+}
+
+@media screen and (max-height: 599px) {
+  #main {
+    padding: 10px;
+    justify-content: flex-start;
+  }
+  
+  body {
+    align-items: flex-start;
+  }
+}
+
+
+/* HORIZOTNTAL */
+@media screen and (min-width: 768px) {
+  #main {
+    max-width: 600px;
+    margin: 0 auto;
+  }
 }
