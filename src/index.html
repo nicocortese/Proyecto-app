@@ -2,7 +2,7 @@
 <html lang="es" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <title>Datos a llenar</title>
+    <title>App Juegos</title>
     <meta
       name="viewport"
       content="viewport-fit=cover, width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./css/style.css"/>
     <link rel="stylesheet" href="./css/tateti.css"/>
     <link rel="stylesheet" href="./css/generala.css"/>
+    <link rel="stylesheet" href="./css/topo.css" />
 
     </head>
     <body>
@@ -21,7 +22,7 @@
         <h3>Elegí el juego que deseas</h3>
         <button id="btn-j1">Jugá al Ta-Te-Ti</button>
         <button id="btn-j2">Jugá a la Generala</button>
-        <button id="btn-j3" disabled>Menos este, por ahora no juegues</button>
+        <button id="btn-j3">Jugá a "Golpea al Topo"</button>
       </div>
     
       <!--JUEGO 1-->
@@ -105,11 +106,18 @@
       <!--JUEGO 3-->
       <div id="j3" class="game nodisp">
         <button id="btn-j3-back">Volver</button> 
-        <h2>Juego 3</h2>
-        <p>Juego 3 acá...</p>
+        <h2>Golpea al Topo</h2>
+        <div id="topo-game-container"></div>
+
+        <div id="modalTopoGameover" type="modal">
+          <p id="topoGameoverMsg"></p>
+          <button id="resetTopoGame">Volver a jugar</button>
+        </div>
+        
       </div>
       <script src="./js/app.js" type="module"></script>
       <script src="./js/tatetiapp.js" type="module"></script>
       <script src= "./js/generalapp.js" type="module"></script>
+      <script src="./js/topoapp.js" type="module"></script>
     </body>
 </html>

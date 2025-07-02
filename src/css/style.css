@@ -46,7 +46,7 @@ input {
 }
 
 #j3 { 
-  background-color: chartreuse;
+  background-color: #E08A35;
 }
 
 #main, .game {
@@ -74,6 +74,9 @@ input {
   font-size: 16px;
   border: none;
   border-radius: 4px;
+}
+
+#btn-j1, #btn-j2, #btn-j3 {
   cursor: pointer;
 }
 
